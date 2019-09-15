@@ -29,8 +29,11 @@ module Fluent::Plugin
       if record.has_key?(key_name)
         raw = record[key_name]
         if raw[0] == '{' || raw[0] == '['
-          converted = JSON.parse(raw, object_class: OpenStruct)
-          record[key_name] = converted
+          begin
+            converted = JSON.parse(raw, object_class: OpenStruct)
+            record[key_name] = converted
+          rescue JSON::ParserError # if there is a parse error pass the un-modified record as it is instead of failing
+          end
         end
       end
       record
