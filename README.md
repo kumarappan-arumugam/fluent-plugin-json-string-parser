@@ -8,16 +8,17 @@ This Gem is a Fluentd plugin filter that helps to manage text logs. When enabled
 
 ### RubyGems
 
-```
-$ gem install fluent-plugin-json-string-parser
+```ruby
+$ gem install specific_install
+$ gem specific_install https://github.com/kumarappan-arumugam/fluent-plugin-json-string-parser.git
 ```
 
 ### Bundler
 
-Add following line to your Gemfile:
+Add following line to your [Gemfile](https://bundler.io/guides/git.html):
 
 ```ruby
-gem "fluent-plugin-json-string-parser"
+gem 'fluent-plugin-json-string-parser', github: 'kumarappan-arumugam/fluent-plugin-json-string-parser'
 ```
 
 And then execute:
@@ -28,13 +29,11 @@ $ bundle
 
 ## Configuration
 
-You can generate configuration template:
+* See also: [Filter Plugin Overview](https://docs.fluentd.org/v/1.0/filter#overview)
 
-```
-$ fluent-plugin-config-format filter json_string_parser
-```
+##### key_name (string) (required)
 
-You can copy and paste generated documents here.
+Specify field name in the record to parse.
 
 ## Usage
 
