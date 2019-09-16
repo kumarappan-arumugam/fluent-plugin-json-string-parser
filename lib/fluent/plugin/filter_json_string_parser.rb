@@ -30,11 +30,11 @@ module Fluent::Plugin
         if raw[0] == '{' || raw[0] == '['
           begin
             # convert python literals if any to avoid json parse error
-            raw = raw.gsub(/[\r\n]+/, ' ').gsub(/\\n/, ' ').gsub(/u'/,'"').gsub(/'/,'"').gsub(/None/,'""').gsub(/null/,'""')
+            raw = raw.gsub(/[\r\n]+/, ' ').gsub(/u'/,'"').gsub(/'/,'"').gsub(/None/,'""').gsub(/null/,'""')
             puts raw
             converted = Yajl.load(raw)
             record[key_name] = converted
-          # rescue Yajl::ParseError # if there is a parse error pass the un-modified record as it is instead of failing
+          rescue Yajl::ParseError # if there is a parse error pass the un-modified record as it is instead of failing
           end
         end
       end
