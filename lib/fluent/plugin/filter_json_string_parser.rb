@@ -31,6 +31,7 @@ module Fluent::Plugin
           begin
             # convert python literals if any to avoid json parse error
             raw = raw.gsub(/u'/,'"').gsub(/'/,'"')
+            puts raw
             converted = Yajl.load(raw)
             record[key_name] = converted
           # rescue Yajl::ParseError # if there is a parse error pass the un-modified record as it is instead of failing
