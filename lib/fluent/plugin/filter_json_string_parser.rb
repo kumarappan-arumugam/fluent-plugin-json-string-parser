@@ -14,7 +14,6 @@
 # limitations under the License.
 
 require 'json'
-require 'ostruct'
 require 'fluent/plugin/filter'
 
 module Fluent::Plugin
@@ -32,8 +31,8 @@ module Fluent::Plugin
         if raw[0] == '{' || raw[0] == '['
           begin
             # convert python single quotes if any to avoid json parse error
-            raw.gsub(/u'/,'"').gsub(/'/,'"')
-            converted = JSON.parse(raw, object_class: OpenStruct)
+            raw = raw.gsub(/u'/,'"').gsub(/'/,'"')
+            converted = JSON.parse(raw)
             record[key_name] = converted
           # rescue JSON::ParserError # if there is a parse error pass the un-modified record as it is instead of failing
           end
