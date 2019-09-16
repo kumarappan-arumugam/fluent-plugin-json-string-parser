@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'json'
+require 'yajl'
 require 'fluent/plugin/filter'
 
 module Fluent::Plugin
@@ -32,7 +32,7 @@ module Fluent::Plugin
           begin
             # convert python single quotes if any to avoid json parse error
             raw = raw.gsub(/u'/,'"').gsub(/'/,'"')
-            converted = JSON.parse(raw)
+            converted = Yajl.load(raw)
             record[key_name] = converted
           # rescue JSON::ParserError # if there is a parse error pass the un-modified record as it is instead of failing
           end
